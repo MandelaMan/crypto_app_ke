@@ -1,0 +1,27 @@
+const { verify } = require("jsonwebtoken");
+
+module.exports = {
+  errorHandler: (statusCode, message) => {
+    const error = new Error();
+
+    error.statusCode = statusCode;
+    error.message = message;
+
+    return error;
+  },
+  verifyToken: (req, res, next) => {
+    const token = req.cookies.access_token;
+
+    if (!token) {
+      return next(this.errorHandler(403, "Token not provided"));
+    }
+
+    verify(token, "4_8y$1hDv76", (err, user) => {
+      if (err) return next(this.errorHandler(403, err));
+
+      req.user = user;
+
+      next();
+    });
+  },
+};
