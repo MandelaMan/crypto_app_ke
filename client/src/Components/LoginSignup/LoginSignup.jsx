@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './LoginSignup.css'
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { useDispatch ,useSelector} from "react-redux";
 import { signUpStart, signUpSuccess, signUpFailure, signInStart, signInSuccess, signInFailure , resetState } from "../../redux/user/userSlice";
 
@@ -95,6 +95,10 @@ const LoginSignup = () => {
       console.log(err)
     }
   } 
+
+  if(currentUser){
+    return <Navigate to="/"/>
+  }
 
   return (
     <div className='container'>
