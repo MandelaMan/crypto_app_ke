@@ -59,6 +59,20 @@ module.exports = {
       });
     });
   },
+  getBalance: async (req, res, next) => {
+    if (req.user.id !== req.params.id) {
+      return next(errorHandler(403, "You are not authenticated"));
+    }
+
+    const results = {
+      balance: 500,
+    };
+
+    return res.status(200).json({
+      success: 1,
+      data: results,
+    });
+  },
   test: (req, res) => {
     res.json({
       message: "ok",

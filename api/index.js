@@ -2,14 +2,11 @@ const express = require("express");
 const userRoutes = require("./routes/user.route");
 const authRoutes = require("./routes/auth.route");
 const cookieParser = require("cookie-parser");
-var cors = require("cors");
 const path = require("path");
 
 require("dotenv").config();
 
 const app = express();
-
-app.use(cors());
 
 const ___dirname = path.resolve();
 
@@ -17,7 +14,7 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("Server is up and running " + process.env.APP_PORT);
 });
 

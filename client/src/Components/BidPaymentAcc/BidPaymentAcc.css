@@ -1,0 +1,32 @@
+.bid-payment-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+.bid-payment-account-header {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    line-height: normal;
+    margin-bottom: 10px;
+    opacity: 0.85;
+    font-weight: 600;
+}
+
+.bid-payment-details {
+    color: white;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    font-weight: 600;
+}
+.bid-payment-details p {
+    margin-bottom: 10px;
+}

@@ -2,14 +2,8 @@ import React, { useState } from 'react'
 import './Mine.css'
 import left_Image from '../Assets/Bitcoin-Logo.png'
 import right_image from '../Assets/TRON-Logo.png'
-import home_button from '../Assets/Home_button2.png'
-import product_icon from '../Assets/Product_Icon.png'
-import team_icon    from '../Assets/Team_image.png'
-import mine_icon from '../Assets/Mine_logo.png'
-import { Link,BrowserRouter as Router} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import BottomBar from '../BottomBar/BottomBar'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { pink } from '@mui/material/colors'
 import { useDispatch } from 'react-redux'
 import { signOutUserSuccess, signOutUserStart, signOutUserFailure } from '../../redux/user/userSlice'
 
@@ -17,7 +11,7 @@ const Mine = () => {
 
     const dispatch = useDispatch()
 
-    const [menu,setMenu] = useState('');
+    
     const [loadPage,setLoadPage] = useState({
         recharge: false,
         withdrawal : false,
@@ -76,9 +70,8 @@ const Mine = () => {
 
         <div className="mine-mine-activities">
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,bidPaymentAccount:true})}}>
-                 <Link style={{textDecoration: 'none'}} to = '/bidpaymentaccount'>
+                 <Link style={{textDecoration: 'none'}} to = '/bidAccount'>
                     <button>Bind Payment account</button>
-                    
                  </Link>
                 {loadPage.bidPaymentAccount?<div className=''></div>:<></>}   
             </div>

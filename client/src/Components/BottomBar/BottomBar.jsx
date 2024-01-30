@@ -4,7 +4,7 @@ import home_button from '../Assets/Home_button2.png'
 import product_icon from '../Assets/Product_Icon.png'
 import team_icon    from '../Assets/Team_image.png'
 import mine_icon from '../Assets/Mine_logo.png'
-import { Link, Route,BrowserRouter as Router} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const BottomBar = () => {

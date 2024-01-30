@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Deposit.css'
 import mpesa_logo from '../Assets/mpesa-logo.png'
 

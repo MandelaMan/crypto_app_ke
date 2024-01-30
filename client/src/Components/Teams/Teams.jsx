@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Teams.css'
 import tether_logo from'../Assets/Cosmos-Logo.png'
-import { Link,BrowserRouter as Router} from 'react-router-dom'
+
 import BottomBar from '../BottomBar/BottomBar'
 const Teams = () => {
-  const [menu,setMenu] = useState('')
+  
   return (
     <div className='teams'>
         <div className="teams-header">

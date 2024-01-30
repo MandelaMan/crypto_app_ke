@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter , Routes, Route} from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import MinePage from "./Pages/MinePage";
+import ProductPage from "./Pages/ProductPage";
+import TeamsPage from "./Pages/TeamsPage";
+import Loginpage from "./Pages/Loginpage";
+// import Footer from "./Components/Footer/Footer";
+import RechargePage from "./Pages/RechargePage";
+import DepositPage from "./Pages/DepositPage";
+import RechargeLogPage from "./Pages/RechargeLogPage";
+import RechargeUploadPage from "./Pages/RechargeUploadPage";
+import ProjectIncomePage from "./Pages/ProjectIncomePage";
+import WithdrawPage from "./Pages/WithdrawPage";
+import WithdrawalHistoryPage from "./Pages/WithdrawalHistoryPage";
+import PrivateRoute from "./PrivateRoute";
+import BidPaymentAccPage from "./Pages/BidPaymentAccPage";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* visible to the public */}
+        <Route path="/login" element={<Loginpage />} />
+
+        {/* Need authentication to access */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/mine" element={<MinePage />} />
+          <Route path="/products" element={<ProductPage />} />
+          <Route path="/teams" element={<TeamsPage />} />
+          <Route path="/recharge" element={<RechargePage />} />
+          <Route path="/deposit" element={<DepositPage />} />
+          <Route path="/rechargeLog" element={<RechargeLogPage />} />
+          <Route path="/rechargeUpload" element={<RechargeUploadPage />} />
+          <Route path="/projectIncome" element={<ProjectIncomePage />} />
+          <Route path="/withdraw" element={<WithdrawPage />} />
+          <Route path="/bidAccount" element={<BidPaymentAccPage />} />
+          <Route
+            path="/withdrawalHistory"
+            element={<WithdrawalHistoryPage />}
+          />
+        </Route>
+      </Routes>
+      {/* <Footer /> */}
+    </BrowserRouter>
   )
 }
 
-export default App
+export default App;
