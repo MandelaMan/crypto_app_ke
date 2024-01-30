@@ -12,9 +12,9 @@ const LoginSignup = () => {
 
   const [action,setAction] = useState("Login") 
 
-   const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({})
 
-   const {currentUser, loading, error} = useSelector((state) => state.user)
+  const {currentUser, loading, error} = useSelector((state) => state.user)
 
   const handleChange = (e) => {
     setFormData({
