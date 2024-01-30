@@ -30,17 +30,16 @@ const Recharge = () => {
                 <button onClick={() => setAmount(120000)}>Recharge 120000</button>
             </div>
           </div>
-            
         </div>
         <div className="recharge-input">
           <p>Recharge Amount</p>
           <input type="text" placeholder='Please enter amount recharged' value={amount} disabled={true}/>
-          <button  onClick={()=>{currentStatus('recharge')}}>
-            <Link style={{textDecoration: 'none'}} to = '/deposit'>
-               Recharge
-            </Link>
-            {status==="recharge"? <div className=''></div>:<></>}
-          </button>
+          <Link style={{textDecoration: 'none'}} to = '/deposit'>
+            <button  onClick={()=>{currentStatus('recharge')}}>
+                Recharge
+              {status==="recharge"? <div className=''></div>:<></>}
+            </button>
+          </Link>
         </div>
         <div className="deposit-rules">
           <p>Deposit Rules</p>
