@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './LoginSignup.css'
 import { useNavigate } from "react-router-dom"
 import { useDispatch ,useSelector} from "react-redux";
@@ -43,8 +43,8 @@ const LoginSignup = () => {
 
         const data = await res.json()
 
-        if(data.success === false){  
-          dispatch(signUpFailure(data.message))
+        if(data['success'] === 0){  
+          dispatch(signUpFailure(data['message'] === 0))
           return;
         }
         else{
@@ -77,8 +77,8 @@ const LoginSignup = () => {
 
         const data = await res.json()
 
-        if(data.success === false){ 
-          dispatch(signInFailure(data.message))
+        if(data['success'] === 0){ 
+          dispatch(signInFailure(data['message']))
           return;
         }
         else{
@@ -90,21 +90,11 @@ const LoginSignup = () => {
         dispatch(resetState())
     }
     catch(err){             
-      dispatch(signInFailure(err.message))
+      // dispatch(signInFailure(...error, err.message))
+
+      console.log(err)
     }
   } 
-
-  useEffect(() => { 
-    if(currentUser ) {
-      return navigate('/')            
-    }
-    else{
-      setAction("Login")
-      return;
-    }
-
-    // eslint-disable-next-line
-  } ,[currentUser]) 
 
   return (
     <div className='container'>

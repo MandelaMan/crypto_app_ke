@@ -22,8 +22,6 @@ module.exports = {
           return next(errorHandler(500, err.message));
         }
 
-        const isValidUser = results;
-
         if (!results) {
           return next(
             errorHandler(500, "Invalid credentials. Please try again...")
@@ -47,9 +45,9 @@ module.exports = {
             .status(200)
             .json(remaining_info);
         } else {
-          return res.status(500).json({
+          return res.status(200).json({
             success: 0,
-            message: "Invalid Email or Address",
+            message: "Invalid Email or Password",
           });
         }
       });

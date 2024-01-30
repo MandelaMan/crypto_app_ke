@@ -33,6 +33,7 @@ const userSlice = createSlice({
       state.error = null;
     },
     signInFailure: (state, action) => {
+      state.currentUser = null;
       state.error = action.payload;
       state.loading = false;
     },
@@ -69,6 +70,7 @@ const userSlice = createSlice({
       state.error = null;
     },
     signOutUserFailure: (state, action) => {
+      state.currentUser = null;
       state.error = action.payload;
       state.loading = false;
     },
