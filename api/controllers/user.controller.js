@@ -7,15 +7,6 @@ const { genSaltSync, hashSync, compareSync, compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 module.exports = {
-  getBalances: async (req, res, next) => {
-    if (req.user.id !== req.params.id) {
-      return next(errorHandler(403, "You are not authenticated"));
-    }
-
-    res.json({
-      message: "ok",
-    });
-  },
   redeemCode: async (code) => {
     await updateInvitationCodeRedeemTimes(code, (err, results) => {
       if (err) {
@@ -53,10 +44,7 @@ module.exports = {
         });
       }
 
-      return res.status(200).json({
-        success: 1,
-        data: results,
-      });
+      return res.status(200).json(results);
     });
   },
   getBalance: async (req, res, next) => {

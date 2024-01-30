@@ -1,6 +1,7 @@
 const express = require("express");
 const userRoutes = require("./routes/user.route");
 const authRoutes = require("./routes/auth.route");
+const productRoutes = require("./routes/product.route");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 
@@ -20,6 +21,7 @@ app.listen(3000, () => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/product", productRoutes);
 
 app.use(express.static(path.join(___dirname, "/client/dist")));
 

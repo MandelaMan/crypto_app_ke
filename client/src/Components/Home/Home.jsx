@@ -20,12 +20,11 @@ const Home = () => {
         buyProduct: false
     });
 
-    const [invitationIncome, setInvitationIncome] = useState({
-        reedem_amount: 0,
-        redeemed_times: 0
-    })
+    const [invitationIncome, setInvitationIncome] = useState(null)
 
-    const [balance, setBalance] = useState()
+    const [balance, setBalance] = useState(0)
+
+     const [products, setProducts] = useState(null)
 
     const getBalance = async () => {
         try{
@@ -35,10 +34,10 @@ const Home = () => {
 
             const data = await res.json()
 
-            if(data.success === 0){ 
+            if(data['success'] === 0){ 
                 // setMyListingsError(data.message)        
                 return;
-            }
+            }            
             setBalance(data)
         }
         catch(err){
@@ -54,27 +53,76 @@ const Home = () => {
 
             const data = await res.json()
 
-            if(data.success === false){ 
+            if(data['success'] === 0){ 
                 // setMyListingsError(data.message)        
                 return;
             }
 
-            setInvitationIncome({
-                ...invitationIncome,
-                redeemed_times: data.data.redeemed_times,
-                reedem_amount: data.data.reedem_amount
-            })
+            setInvitationIncome(data)
         }
         catch(err){
             console.log(err)
         }
     }
 
+    const getProducts = async () => {
+        try{
+            const res = await fetch(`/api/product/all`, {
+                method: 'GET',
+            });
+
+            const data = await res.json()
+
+            if(data['success'] === 0){ 
+                // setMyListingsError(data.message)        
+                return;
+            }
+
+            setProducts(data)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    const coverImage = (logo) => {
+
+        if(logo === "bitcoin"){
+            return bitcoin_logo;
+        }
+        else if(logo === "binance"){
+            return binance_logo;
+        }
+        else if(logo === "bnb"){
+            return bnb_logo;
+        }
+        else if(logo === "cosmos"){
+            return cosmos_logo;
+        }
+        else if(logo === "dogcoin"){
+            return dogcoin_logo;
+        }
+        else if(logo === "flow"){
+            return flow_logo;
+        }
+        else if(logo === "litecoin"){
+            return litecoin_logo;
+        }
+        else if(logo === "tether"){
+            return tether_logo;
+        }
+        else{
+            return bitcoin_logo;
+        }
+    };
+
+
+   
     useEffect(() => {     
       
       getInvitationIncome();
-
       getBalance();
+      getProducts();
 
       return ()=>{
         // removeEventListner(a)  //whenever the component removes it will executes
@@ -107,193 +155,43 @@ const Home = () => {
              <div className="home-home-bar">
                 <div className="home-home-left">
                     <h1>Invite Income</h1>
-                    <h2>KES {invitationIncome.reedem_amount > 1 ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
+                    <h2>KES {invitationIncome ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
                 </div>
                 <div className="home-home-right">
                     <h1>Total Earnings</h1>
                     <h2>KES 0.00</h2>
                 </div>                
             </div>
-            
+            {/* {products.length} */}
             <div className="home-products-tittle">
                 <p>Crypto Currencies</p>
-                <hr />
-                <img src= {flow_logo} alt="" />
-                <div className="home-Products-bar">
-                    <div className="home-product-left">
-                        <h1>KES 1500.00</h1>
-                        <h2>Product Price</h2>
+
+                {products && products.map((p,i) => 
+                   <>
+                    <hr key={i} />
+                     <img src={coverImage(p.name)} alt=""/>
+                    <div className="home-Products-bar">
+                        <div className="home-product-left">
+                            <h1>KES {p.price}.00</h1>
+                            <h2>Product Price</h2>
+                        </div>
+                        <div className="home-product-middle">
+                            <h1>{p.period_cycle} Days</h1>
+                            <h2>Product Cycle</h2>    
+                        </div>
+                        <div className="home-product-right">
+                            <h1>KES {p.daily_earnings}.00</h1>
+                            <h2>Daily Earnings</h2>    
+                        </div>    
                     </div>
-                    <div className="home-product-middle">
-                        <h1>20 Days</h1>
-                        <h2>Product Cycle</h2>    
-                    </div>
-                    <div className="home-product-right">
-                        <h1>KES 150.00</h1>
-                        <h2>Daily Earnings</h2>    
-                    </div>    
-                </div>
-                <Link style={{textDecoration: 'none'}} to = '/products'>
-                <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
-                    Buy Product
-                {recharge.buyProduct? <div className=''></div>:<></>}
-                </button>
-                </Link>
-                <hr />
-                <img src= {binance_logo} alt="" />
-                <div className="home-Products-bar">
-                    <div className="home-product-left">
-                        <h1>KES 4100.00</h1>
-                        <h2>Product Price</h2>
-                    </div>
-                    <div className="home-product-middle">
-                        <h1>25 Days</h1>
-                        <h2>Product Cycle</h2>    
-                    </div>
-                    <div className="home-product-right">
-                        <h1>KES 410.00</h1>
-                        <h2>Daily Earnings</h2>    
-                    </div>    
-                </div>
-                <Link style={{textDecoration: 'none'}} to = '/products'>
-                    <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
-                        Buy Product
-                    {recharge.buyProduct? <div className=''></div>:<></>}
-                    </button>
-                </Link>
-                <hr />
-                <img src= {bnb_logo} alt="" />
-                <div className="home-Products-bar">
-                    <div className="home-product-left">
-                        <h1>KES 6200.00</h1>
-                        <h2>Product Price</h2>
-                    </div>
-                    <div className="home-product-middle">
-                        <h1>25 Days</h1>
-                        <h2>Product Cycle</h2>    
-                    </div>
-                    <div className="home-product-right">
-                        <h1>KES 620.00</h1>
-                        <h2>Daily Earnings</h2>    
-                    </div>    
-                </div>
-                <Link style={{textDecoration: 'none'}} to = '/products'>
-                    <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
-                        Buy Product
-                    {recharge.buyProduct? <div className=''></div>:<></>}
-                    </button>
-                </Link>
-                <hr />
-                <img src= {cosmos_logo} alt="" />
-                <div className="home-Products-bar">
-                    <div className="home-product-left">
-                        <h1>KES 13500.00</h1>
-                        <h2>Product Price</h2>
-                    </div>
-                    <div className="home-product-middle">
-                        <h1>25 Days</h1>
-                        <h2>Product Cycle</h2>    
-                    </div>
-                    <div className="home-product-right">
-                        <h1>KES 1350.00</h1>
-                        <h2>Daily Earnings</h2>    
-                    </div>    
-                </div>
-                <Link style={{textDecoration: 'none'}} to = '/products'>
-                    <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
-                        Buy Product
-                    {recharge.buyProduct? <div className=''></div>:<></>}
-                    </button>
-                </Link>
-                <hr />
-                <img src= {dogcoin_logo} alt="" />
-                <div className="home-Products-bar">
-                    <div className="home-product-left">
-                        <h1>KES 22000.00</h1>
-                        <h2>Product Price</h2>
-                    </div>
-                    <div className="home-product-middle">
-                        <h1>25 Days</h1>
-                        <h2>Product Cycle</h2>    
-                    </div>
-                    <div className="home-product-right">
-                        <h1>KES 2200.00</h1>
-                        <h2>Daily Earnings</h2>    
-                    </div>    
-                </div>
-                <Link style={{textDecoration: 'none'}} to = '/products'>
-                    <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
-                        Buy Product
-                    {recharge.buyProduct? <div className=''></div>:<></>}
-                    </button>
-                </Link>
-                <hr />
-                <img src= {litecoin_logo} alt="" />
-                <div className="home-Products-bar">
-                    <div className="home-product-left">
-                        <h1>KES 40000.00</h1>
-                        <h2>Product Price</h2>
-                    </div>
-                    <div className="home-product-middle">
-                        <h1>25 Days</h1>
-                        <h2>Product Cycle</h2>    
-                    </div>
-                    <div className="home-product-right">
-                        <h1>KES 4000.00</h1>
-                        <h2>Daily Earnings</h2>    
-                    </div>    
-                </div>
-                <Link style={{textDecoration: 'none'}} to = '/products'>
-                    <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
-                        Buy Product
-                    {recharge.buyProduct? <div className=''></div>:<></>}
-                    </button>
-                </Link>
-                <hr />
-                <img src= {tether_logo} alt="" />
-                <div className="home-Products-bar">
-                    <div className="home-product-left">
-                        <h1>KES 52000.00</h1>
-                        <h2>Product Price</h2>
-                    </div>
-                    <div className="home-product-middle">
-                        <h1>25 Days</h1>
-                        <h2>Product Cycle</h2>    
-                    </div>
-                    <div className="home-product-right">
-                        <h1>KES 5200.00</h1>
-                        <h2>Daily Earnings</h2>    
-                    </div>    
-                </div>
-                <Link style={{textDecoration: 'none'}} to = '/products'>
-                    <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
-                        Buy Product
-                    {recharge.buyProduct? <div className=''></div>:<></>}
-                    </button>
-                </Link>
-                <hr />
-                <img src= {bitcoin_logo} alt="" />
-                <div className="home-Products-bar">
-                    <div className="home-product-left">
-                        <h1>KES 79000.00</h1>
-                        <h2>Product Price</h2>
-                    </div>
-                    <div className="home-product-middle">
-                        <h1>25 Days</h1>
-                        <h2>Product Cycle</h2>    
-                    </div>
-                    <div className="home-product-right">
-                        <h1>KES 7900.00</h1>
-                        <h2>Daily Earnings</h2>    
-                    </div>    
-                </div>
-                <Link style={{textDecoration: 'none'}} to = '/products'>
-                    <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
-                        Buy Product
-                    {recharge.buyProduct? <div className=''></div>:<></>}
-                    </button>
-                </Link>
-                <hr />
+                    <Link style={{textDecoration: 'none'}} to = '/products'>
+                        <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
+                            Buy Product
+                        {recharge.buyProduct? <div className=''></div>:<></>}
+                        </button>
+                    </Link>
+                    </>
+                )}
             </div>
             <BottomBar />
         </div>

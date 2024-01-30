@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2024 at 12:16 PM
+-- Generation Time: Jan 30, 2024 at 02:32 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,6 +48,34 @@ INSERT INTO `invitation_income` (`id`, `user_id`, `code`, `created_on`, `reedem_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `daily_earnings` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `period_cycle` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `price`, `daily_earnings`, `name`, `period_cycle`) VALUES
+(1, 7800, 3000, 'bitcoin', 26),
+(2, 4500, 1200, 'binance', 30),
+(3, 10000, 5600, 'bnb', 30),
+(4, 2000, 300, 'cosmos', 15),
+(5, 10000, 4000, 'dogcoin', 25),
+(6, 2000, 1100, 'flow', 15),
+(7, 15000, 8000, 'litecoin', 30),
+(8, 3500, 900, 'tether', 25);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transactions`
 --
 
@@ -67,10 +95,12 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `code`, `created_on`, `type`, `user_id`, `method`, `status`, `amount`) VALUES
-(1, 'SAQ89UYJ23', '2024-01-29 07:15:51', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 500),
-(2, 'EQT-9087RT45', '2024-01-29 07:15:51', 'Withdrawal', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'Bank Transfer', 'Complete', 250),
+(1, 'SAQ89UYJ23', '2024-01-29 07:15:51', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Inprogress', 500),
+(2, 'SAQ23RYJ23', '2024-01-29 07:15:51', 'Withdrawal', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Inprogress', 250),
 (3, 'SAQ9I78J23', '2024-01-29 07:20:14', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 2500),
-(4, 'MXQ9IP8J26', '2024-01-29 07:20:14', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 3000);
+(4, 'MXQ9IP8J26', '2024-01-29 07:20:14', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 3000),
+(5, '', '2024-01-30 14:02:35', 'Earnings', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 1200),
+(6, '', '2024-01-30 14:02:35', 'Earnings', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 55);
 
 -- --------------------------------------------------------
 
@@ -108,6 +138,12 @@ ALTER TABLE `invitation_income`
   ADD UNIQUE KEY `code` (`code`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
@@ -132,10 +168,16 @@ ALTER TABLE `invitation_income`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
