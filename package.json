@@ -1,5 +1,5 @@
 {
-  "name": "crypto-app",
+  "name": "crypto_app_ke",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/MandelaMan/real-estate-app.git",
@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon api/index.js",
-    "start": "node api/index.js"
+    "start": "node api/index.js",
+    "build": "yarn install && yarn install --prefix client && yarn run build --prefix client"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

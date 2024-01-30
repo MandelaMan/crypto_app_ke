@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './BottomBar.css'
 import home_button from '../Assets/Home_button2.png'
 import product_icon from '../Assets/Product_Icon.png'

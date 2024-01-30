@@ -1,4 +1,3 @@
-import React from 'react'
 import './BidPaymentAcc.css'
 import BottomBar from '../BottomBar/BottomBar'
 
