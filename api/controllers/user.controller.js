@@ -64,14 +64,7 @@ module.exports = {
       return next(errorHandler(403, "You are not authenticated"));
     }
 
-    const results = {
-      balance: 500,
-    };
-
-    return res.status(200).json({
-      success: 1,
-      data: results,
-    });
+    return res.status(200).json(500);
   },
   test: (req, res) => {
     res.json({

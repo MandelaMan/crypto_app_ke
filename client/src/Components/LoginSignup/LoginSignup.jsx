@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './LoginSignup.css'
 import { Navigate, useNavigate } from "react-router-dom"
 import { useDispatch ,useSelector} from "react-redux";

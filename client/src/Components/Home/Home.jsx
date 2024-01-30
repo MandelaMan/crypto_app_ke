@@ -35,11 +35,11 @@ const Home = () => {
 
             const data = await res.json()
 
-            if(data.success === false){ 
+            if(data.success === 0){ 
                 // setMyListingsError(data.message)        
                 return;
             }
-            setBalance(data.balance)
+            setBalance(data)
         }
         catch(err){
             console.log(err)
@@ -92,21 +92,27 @@ const Home = () => {
                     <h2>KES {balance}.00</h2>
                     <Link style={{textDecoration: 'none'}} to = '/withdraw'>
                         <button onClick={()=>{setRecharge({...recharge, withdraw: true})}}>
-                            Withdrawal
+                            Withdraw
                         {recharge.withdraw? <div className=''></div>:<></>}
                         </button>
                     </Link> 
-                </div>
-                <div className="home-home-right">
+                    <Link style={{textDecoration: 'none'}} to = '/withdraw'>
+                        <button onClick={()=>{setRecharge({...recharge, withdraw: true})}}>
+                            Deposit
+                        {recharge.withdraw? <div className=''></div>:<></>}
+                        </button>
+                    </Link> 
+                </div>                
+            </div>
+             <div className="home-home-bar">
+                <div className="home-home-left">
                     <h1>Invite Income</h1>
                     <h2>KES {invitationIncome.reedem_amount > 1 ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
-                    <Link style={{textDecoration: 'none'}} to = '/recharge'>
-                        <button onClick={()=>{setRecharge({...recharge,recharge: true})}}>
-                            Recharge
-                        {recharge.recharge? <div className=''></div>:<></>}
-                        </button>
-                    </Link>  
                 </div>
+                <div className="home-home-right">
+                    <h1>Total Earnings</h1>
+                    <h2>KES 0.00</h2>
+                </div>                
             </div>
             
             <div className="home-products-tittle">
