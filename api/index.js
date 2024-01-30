@@ -2,10 +2,16 @@ const express = require("express");
 const userRoutes = require("./routes/user.route");
 const authRoutes = require("./routes/auth.route");
 const cookieParser = require("cookie-parser");
+var cors = require("cors");
+const path = require("path");
 
 require("dotenv").config();
 
 const app = express();
+
+app.use(cors());
+
+const ___dirname = path.resolve();
 
 app.use(express.json());
 
@@ -17,6 +23,12 @@ app.listen(3000, () => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
+
+app.use(express.static(path.join(___dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(___dirname, "client", "dist", "index.html"));
+});
 
 //This is a middleware that allows us to catch all errors and report
 app.use((err, req, res, next) => {

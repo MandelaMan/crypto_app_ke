@@ -1,4 +1,4 @@
-const { verify } = require("jsonwebtoken");
+const { verify, sign } = require("jsonwebtoken");
 
 module.exports = {
   errorHandler: (statusCode, message) => {
@@ -8,6 +8,14 @@ module.exports = {
     error.message = message;
 
     return error;
+  },
+  generateInvitationCode: () => {
+    return Math.random().toString(36).slice(-6).toLocaleUpperCase();
+  },
+  generateToken: (id) => {
+    return sign({ id }, process.env.JWT_KEY, {
+      expiresIn: "1h",
+    });
   },
   verifyToken: (req, res, next) => {
     const token = req.cookies.access_token;
@@ -23,5 +31,8 @@ module.exports = {
 
       next();
     });
+  },
+  verifyAccount: (req, res, next) => {
+    const { user_code } = req.body;
   },
 };

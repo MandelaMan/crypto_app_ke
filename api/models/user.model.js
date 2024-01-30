@@ -3,8 +3,21 @@ const pool = require("../config/database");
 module.exports = {
   users: (callBack) => {
     pool.query(
-      `SELECT first_name, last_name, email, gender FROM registration`,
+      `SELECT first_name, last_name, email, gender FROM users`,
       [],
+      (error, results) => {
+        if (error) {
+          return callBack(error);
+        }
+        return callBack(null, results);
+      }
+    );
+  },
+  createInvitationCode: (data, callBack) => {
+    pool.query(
+      `INSERT INTO invitation_code (user_id, code) 
+       values (?, ?)`,
+      [data.user_id, data.code],
       (error, results) => {
         if (error) {
           return callBack(error);
@@ -34,7 +47,7 @@ module.exports = {
   },
   update: (data, callBack) => {
     pool.query(
-      `UPDATE registration first_name=?, last_name=?, email=?, gender=?, password=? where id=?`,
+      `UPDATE users first_name=?, last_name=?, email=?, gender=?, password=? where id=?`,
       [
         data.first_name,
         data.last_name,

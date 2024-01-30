@@ -1,0 +1,78 @@
+.recharge-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 30px;
+    
+}
+
+.recharge-upload-header {
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    line-height: normal;
+    white-space: nowrap;
+    opacity: 0.85;
+}
+
+.recharge-upload-info {
+    font-size: 16px;
+    color: white;
+    opacity: 0.85;
+    text-align: center;
+    line-height: 24px;
+    margin-top: 10px;
+}
+
+.recharge-upload-competion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    max-width: 720px;
+    margin-top: 30px;
+
+}
+
+.recharge-upload-competion input {
+    height: 40px;
+    width: 380px;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    padding: 0 12px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, .65);
+}
+
+.recharge-upload-competion button {
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: blueviolet;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    transition: all .3s ease;
+    border-radius: 20px;
+}
+
+.uploads h3{
+    text-align: left;
+    font-size: 18px;
+    font-weight: normal;
+    color: white;
+    opacity: 0.85;
+    margin-bottom: 12px;    
+}
+
+.uploads img {
+    width: 100px;
+    height: 100px;
+}

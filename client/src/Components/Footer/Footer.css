@@ -1,0 +1,10 @@
+.footer {
+    color: white;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+    opacity: 0.4;
+    overflow: hidden;
+    bottom: 0;
+
+}
