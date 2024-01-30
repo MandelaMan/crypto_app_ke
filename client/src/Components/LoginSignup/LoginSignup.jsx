@@ -47,12 +47,13 @@ const LoginSignup = () => {
           dispatch(signUpFailure(data.message))
           return;
         }
-
-        dispatch(signUpSuccess(data))      
-        setFormData({})
-        dispatch(resetState())   
-        
-        navigate('/login')
+        else{
+          dispatch(signUpSuccess(data))      
+          setFormData({})
+          dispatch(resetState())   
+          
+          navigate('/login')
+        }      
     }
     catch(err){             
       dispatch(signInFailure(err.message))
@@ -76,14 +77,17 @@ const LoginSignup = () => {
 
         const data = await res.json()
 
-        if(data.success === false){  
+        if(data.success === false){ 
           dispatch(signInFailure(data.message))
           return;
         }
-
-        dispatch(signInSuccess(data))      
-        setFormData({})
-        navigate('/')
+        else{
+          dispatch(signInSuccess(data))      
+          setFormData({})
+          navigate('/')
+        }   
+        
+        dispatch(resetState())
     }
     catch(err){             
       dispatch(signInFailure(err.message))
