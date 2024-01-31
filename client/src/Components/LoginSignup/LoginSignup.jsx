@@ -12,9 +12,18 @@ const LoginSignup = () => {
 
   const [action,setAction] = useState("Login") 
 
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({
+    phone_number : "",
+    password : "",
+    username : "",
+    conf_password : "",
+    invitation_code : "",
+  })
 
-  const {currentUser, loading, error} = useSelector((state) => state.user)
+  // const[error, setError] = useState(false)
+  // const[loading, setLoading] = useState(false)
+
+  const {currentUser, error, loading} = useSelector((state) => state.user)
 
   const handleChange = (e) => {
     setFormData({
@@ -64,33 +73,43 @@ const LoginSignup = () => {
 
     e.preventDefault()
 
-    try{  
+    try{         
+      if (formData.phone_number === "" || formData.password === "") {
+        dispatch(signInFailure("Fields cannot be empty")) 
+      } else {
         dispatch(signInStart())
 
         const res = await fetch('/api/auth/signin', {
-          method: 'POST',
-          headers : {
-            'Content-Type' : 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
+            method: 'POST',
+            headers : {
+              'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
 
-        const data = await res.json()
+          const data = await res.json()
 
-        if(data['success'] === 0){ 
-          dispatch(signInFailure(data['message']))
-          return;
-        }
-        else{
-          dispatch(signInSuccess(data))      
-          setFormData({})
-          navigate('/')
-        }   
-        
-        dispatch(resetState())
+          if(data.success === 0){
+            dispatch(signInFailure(data.message))
+            return;
+          }
+          else{
+            dispatch(signInSuccess(data))
+            setFormData({
+              phone_number : "",
+              password : "",
+              username : "",
+              conf_password : "",
+              invitation_code : "",
+            })
+            navigate('/')
+          }
+      }
+
+    
     }
     catch(err){             
-      // dispatch(signInFailure(...error, err.message))
+      // dispatch(signInFailure(err.message))
 
       console.log(err)
     }

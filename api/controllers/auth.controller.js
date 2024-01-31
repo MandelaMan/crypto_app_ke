@@ -23,32 +23,33 @@ module.exports = {
         }
 
         if (!results) {
-          return next(
-            errorHandler(500, "Invalid credentials. Please try again...")
-          );
-        }
-
-        const result = compareSync(
-          req.body.password.toString(),
-          results.password
-        );
-
-        if (result) {
-          results.password = undefined;
-
-          const token = generateToken(results.user_code);
-
-          const { password: pass, ...remaining_info } = results;
-
-          res
-            .cookie("access_token", token, { httpOnly: true })
-            .status(200)
-            .json(remaining_info);
-        } else {
           return res.status(200).json({
             success: 0,
-            message: "Invalid Email or Password",
+            message: "Invalid Mobile No. or Password",
           });
+        } else {
+          const result = compareSync(
+            req.body.password.toString(),
+            results.password
+          );
+
+          if (result) {
+            results.password = undefined;
+
+            const token = generateToken(results.user_code);
+
+            const { password: pass, ...remaining_info } = results;
+
+            res
+              .cookie("access_token", token, { httpOnly: true })
+              .status(200)
+              .json(remaining_info);
+          } else {
+            return res.status(200).json({
+              success: 0,
+              message: "Invalid Mobile No. or Password",
+            });
+          }
         }
       });
     } catch (err) {
@@ -65,7 +66,12 @@ module.exports = {
     try {
       await createAccount(body, (err, results) => {
         if (err) {
-          return next(errorHandler(500, err.message));
+          next(errorHandler(500, err.message));
+
+          return res.status(200).json({
+            success: 0,
+            message: "Error creating the account",
+          });
         }
 
         const token = generateToken(user_code);
@@ -86,7 +92,7 @@ module.exports = {
 
         addInvitationCode(input, (err, results) => {
           if (err) {
-            return next(errorHandler(500, err.message));
+            next(errorHandler(500, err.message));
           }
         });
 
