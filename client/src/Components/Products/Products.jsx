@@ -26,23 +26,6 @@ const Products = () => {
                     <h2>Date purchased</h2>    
                 </div>   
             </div>
-            
-            <hr />
-            <img src= {binance_logo} alt="" />
-            <div className="Products-bar">
-                <div className="product-left">
-                    <h1>KES 1000.00</h1>
-                    <h2>Product Price</h2>
-                </div>
-                <div className="product-middle">
-                    <h1>25 Days</h1>
-                    <h2>Product Cycle</h2>    
-                </div>
-                <div className="product-right">
-                    <h1>18th Jan 15:40</h1>
-                    <h2>Date purchased</h2>    
-                </div>    
-            </div>
             <hr />
         </div>
         <BottomBar />

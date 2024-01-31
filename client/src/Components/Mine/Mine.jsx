@@ -98,7 +98,7 @@ const Mine = () => {
                      <button>Customer Service</button>
                  </Link>
                 {loadPage.customerService?<div className=''></div>:<></>} 
-          </div>
+            </div>
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,logOut:true})}}>
                 <button onClick={signOutUser} style={{textDecoration: 'none'}}>Log Out</button>                
                 {loadPage.logOut?<div className=''></div>:<></>} 

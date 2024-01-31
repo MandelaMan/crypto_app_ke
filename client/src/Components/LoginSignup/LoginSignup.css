@@ -42,7 +42,7 @@
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 }
 
 .input {
@@ -51,8 +51,9 @@
   margin: auto;
   width: 350px;
   height: 40px;
-  background: #eaeaea;;
   border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .input img {
@@ -60,7 +61,7 @@
 }
 
 .input input {
-  height: 38px;
+  height: 39px;
   width: 350px;
   background: #eaeaea;
   border: none;

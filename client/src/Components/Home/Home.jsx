@@ -140,17 +140,21 @@ const Home = () => {
                     <h2>KES {balance}.00</h2>
                     <Link style={{textDecoration: 'none'}} to = '/withdraw'>
                         <button onClick={()=>{setRecharge({...recharge, withdraw: true})}}>
-                            Withdraw
+                            Withdrawal
                         {recharge.withdraw? <div className=''></div>:<></>}
                         </button>
-                    </Link> 
-                    <Link style={{textDecoration: 'none'}} to = '/withdraw'>
-                        <button onClick={()=>{setRecharge({...recharge, withdraw: true})}}>
-                            Deposit
-                        {recharge.withdraw? <div className=''></div>:<></>}
+                    </Link>  
+                </div>      
+                <div className="home-home-right">
+                    <h1>Invite Income</h1>
+                    <h2>KES {invitationIncome.reedem_amount > 1 ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
+                    <Link style={{textDecoration: 'none'}} to = '/recharge'>
+                        <button onClick={()=>{setRecharge({...recharge,recharge: true})}}>
+                            Recharge
+                        {recharge.recharge? <div className=''></div>:<></>}
                         </button>
-                    </Link> 
-                </div>                
+                    </Link>  
+                </div>          
             </div>
              <div className="home-home-bar">
                 <div className="home-home-left">
