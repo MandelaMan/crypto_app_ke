@@ -51,6 +51,26 @@ module.exports = {
       return res.status(200).json(results === undefined ? [] : results);
     });
   },
+  getUserWithdrawableAmount: async (req, res, next) => {
+    if (req.user.id !== req.params.id) {
+      return next(errorHandler(403, "You are not authenticated"));
+    }
+
+    await allTransactionsByUser(req.params.id, (err, results) => {
+      if (err) {
+        return res.status(500).json({
+          success: 0,
+          messgae: "Error getting transactions",
+        });
+      }
+
+      const getAmount = () => {
+        return 5000;
+      };
+
+      return res.status(200).json(results === undefined ? 0 : getAmount());
+    });
+  },
   getInvitationIncome: async (req, res, next) => {
     if (req.user.id !== req.params.id) {
       return next(errorHandler(403, "You are not authenticated"));

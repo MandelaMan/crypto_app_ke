@@ -6,8 +6,10 @@ import { useSelector} from "react-redux";
 const Withdraw = () => {
 
     const { currentUser } = useSelector((state) => state.user)
+
+    const [withdrawableAmount, setWithdrawableAmount] = useState(0)
     
-    const [amount, setAmount] = useState([])
+    const [amount, setAmount] = useState(0)
 
      const getWithdrawableAmount = async () => {
         try{
@@ -19,17 +21,22 @@ const Withdraw = () => {
 
             if(data['success'] === 0){     
                 return;
-            }            
-            setAmount(data)
+            }  
+
+            setWithdrawableAmount(data)
         }
         catch(err){
             console.log(err)
         }
     }
 
+    const handleChange = (e) => {
+        setAmount(e.target.value)
+    }
+
      useEffect(() => {   
         
-    //   getWithdrawableAmount(); 
+      getWithdrawableAmount(); 
 
       return ()=>{
         // removeEventListner(a)  //whenever the component removes it will executes
@@ -42,13 +49,13 @@ const Withdraw = () => {
             Withdraw
         </div>
         <div className="withdraw-account-balance">
-            <p>KES 0.00</p>
+            <p>KES {withdrawableAmount}.00</p>
             <p>My Balance</p>
         </div>
         <div className="withdraw-amount-input">
             <p>Withdraw Amount</p>
-            <input type="text" placeholder='Kindly input the withdrawal amount' />
-            <button>Withdraw</button>
+            <input type="text" id="withdrawal_amount" onChange={handleChange} placeholder='Kindly input the withdrawal amount' />
+            <button disabled={amount < 1 && true}>Withdraw</button>
         </div>
         <div className="withdraw-rules">
             <p>
