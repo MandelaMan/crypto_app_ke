@@ -76,17 +76,20 @@ module.exports = {
 
         const token = generateToken(user_code);
 
+        const code = generateInvitationCode();
+
         const result = {
           user_code,
           username: body.username,
           phone_number: body.phone_number,
           email: "",
+          invitation_code: code,
           is_verified: 1,
         };
 
         const input = {
           user_id: user_code,
-          code: generateInvitationCode(),
+          code,
           reedem_amount: 250,
         };
 

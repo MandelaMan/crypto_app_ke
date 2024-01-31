@@ -2,6 +2,10 @@ const {
   getInvitationIncomeByUserId,
   updateInvitationCodeRedeemTimes,
 } = require("../models/invitation.model.js");
+const {
+  allTransactions,
+  allTransactionsByUser,
+} = require("../models/transaction.model.js");
 const { errorHandler } = require("../utils/helperFunctions.js");
 const { genSaltSync, hashSync, compareSync, compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -29,6 +33,22 @@ module.exports = {
 
     res.json({
       message: "ok",
+    });
+  },
+  getUserTransactions: async (req, res, next) => {
+    if (req.user.id !== req.params.id) {
+      return next(errorHandler(403, "You are not authenticated"));
+    }
+
+    await allTransactionsByUser(req.params.id, (err, results) => {
+      if (err) {
+        return res.status(500).json({
+          success: 0,
+          messgae: "Error getting transactions",
+        });
+      }
+
+      return res.status(200).json(results === undefined ? [] : results);
     });
   },
   getInvitationIncome: async (req, res, next) => {

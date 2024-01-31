@@ -17,7 +17,7 @@ module.exports = {
         });
       }
 
-      return res.status(200).json(results);
+      return res.status(200).json(results === undefined ? [] : results);
     });
   },
   test: (req, res) => {

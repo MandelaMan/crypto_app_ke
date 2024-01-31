@@ -1,7 +1,41 @@
-import React from 'react'
+import {useEffect, useState} from 'react'
 import './Withdraw.css'
 
+import { useSelector} from "react-redux";
+
 const Withdraw = () => {
+
+    const { currentUser } = useSelector((state) => state.user)
+    
+    const [amount, setAmount] = useState([])
+
+     const getWithdrawableAmount = async () => {
+        try{
+            const res = await fetch(`/api/user/withdrawable-amount/${currentUser.user_code}`, {
+                method: 'GET',
+            });
+
+            const data = await res.json()
+
+            if(data['success'] === 0){     
+                return;
+            }            
+            setAmount(data)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+     useEffect(() => {   
+        
+    //   getWithdrawableAmount(); 
+
+      return ()=>{
+        // removeEventListner(a)  //whenever the component removes it will executes
+      }
+    } ,[]) 
+
   return (
     <div className='withdraw'>
         <div className="withdraw-header">

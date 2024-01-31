@@ -22,9 +22,11 @@ const Home = () => {
 
     const [invitationIncome, setInvitationIncome] = useState(null)
 
+    const [myTransactions, setMyTransactions] = useState([])
+
     const [balance, setBalance] = useState(0)
 
-     const [products, setProducts] = useState(null)
+    const [products, setProducts] = useState(null)
 
     const getBalance = async () => {
         try{
@@ -44,6 +46,27 @@ const Home = () => {
             console.log(err)
         }
     }
+
+    
+    const getMyTransactions = async () => {
+        try{
+            const res = await fetch(`/api/user/transactions/${currentUser.user_code}`, {
+                method: 'GET',
+            });
+
+            const data = await res.json()
+
+            if(data['success'] === 0){     
+                return;
+            }            
+            setMyTransactions(data)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+
 
     const getInvitationIncome = async () => {
         try{
@@ -118,8 +141,9 @@ const Home = () => {
 
 
    
-    useEffect(() => {     
-      
+    useEffect(() => {   
+        
+      getMyTransactions();      
       getInvitationIncome();
       getBalance();
       getProducts();
@@ -136,11 +160,11 @@ const Home = () => {
             </div>
             <div className="home-home-bar">
                 <div className="home-home-left">
-                    <h1>withdrawable Earnings</h1>
+                    <h1>Withdrawable Earnings</h1>
                     <h2>KES {balance}.00</h2>
                     <Link style={{textDecoration: 'none'}} to = '/withdraw'>
                         <button onClick={()=>{setRecharge({...recharge, withdraw: true})}}>
-                            Withdrawal
+                            Withdraw
                         {recharge.withdraw? <div className=''></div>:<></>}
                         </button>
                     </Link>  
@@ -162,7 +186,7 @@ const Home = () => {
                     <h2>KES {invitationIncome ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
                 </div>
                 <div className="home-home-right">
-                    <h1>Total product Earnings</h1>
+                    <h1>Total Earnings</h1>
                     <h2>KES 0.00</h2>
                 </div>                
             </div>

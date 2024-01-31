@@ -1,99 +1,98 @@
 .recharge {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 16px;
-    width: 100%;
-    margin: 0;
-    box-sizing: border-box;
-    padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 30px;
 }
 
 .recharge-bar {
-    background: blueviolet;
-    height: 100px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    gap: 5px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  background: blueviolet;
+  height: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 5px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
-.recharge-bar p{
-    padding: 8px;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
+.recharge-bar p {
+  padding: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .recharge-amounts {
-    width: 100%;
-    height: 270px;
-    border-radius: 15px;
+  width: 100%;
+  height: 270px;
+  border-radius: 15px;
 }
 
 .recharge-contents button {
-    border-style: solid;
-    border-radius: 10px;
-    height: 75px;
-    width: 101px;
-    padding: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    color: white;
-    background: none;
+  border-style: solid;
+  border-radius: 10px;
+  height: 75px;
+  width: 101px;
+  padding: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  background: none;
 }
 .recharge-contents {
-    padding: 15px;
+  padding: 15px;
 }
 
 .recharge-input {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
 }
-.recharge-input input{
-    width: 96%;
-    height: 35px;
-    border-radius: 10px;
-    padding-left: 10px;
+.recharge-input input {
+  width: 96%;
+  height: 35px;
+  border-radius: 10px;
+  padding-left: 10px;
 }
 
-.recharge-input input:disabled{
-    background: white;
+.recharge-input input:disabled {
+  background: white;
 }
 
 .recharge-input p {
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
 }
 .recharge-input button {
-    background-color: blueviolet;
-    border-style: none;
-    width: 100%;
-    text-align: center;
-    height: 50px;
-    border-radius: 50px;
-    color: white;
-    font-size: 16px;
-    transition: all .3s ease;
-    font-weight: 600;
+  background-color: blueviolet;
+  border-style: none;
+  width: 100%;
+  text-align: center;
+  height: 50px;
+  border-radius: 50px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.recharge-input button:disabled {
+  background-color: gray;
+  color: white;
 }
 
 .deposit-rules {
-    color: white;
-    font-size: 13px; 
-    font-weight: 600;   
-    
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
 }
-
-
-
-
-
-

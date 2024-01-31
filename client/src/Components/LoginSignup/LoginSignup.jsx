@@ -102,6 +102,7 @@ const LoginSignup = () => {
               conf_password : "",
               invitation_code : "",
             })
+            dispatch(resetState())
             navigate('/')
           }
       }
@@ -109,9 +110,7 @@ const LoginSignup = () => {
     
     }
     catch(err){             
-      // dispatch(signInFailure(err.message))
-
-      console.log(err)
+      dispatch(signInFailure("Fields cannot be blank"))
     }
   } 
 

@@ -35,8 +35,8 @@ const Recharge = () => {
           <p>Recharge Amount</p>
           <input type="text" placeholder='Please enter amount recharged' value={amount} disabled={true}/>
           <Link style={{textDecoration: 'none'}} to = '/deposit'>
-            <button  onClick={()=>{currentStatus('recharge')}}>
-                Recharge
+            <button onClick={()=>{currentStatus('recharge')}} disabled={amount < 1 && true}>
+              Recharge
               {status==="recharge"? <div className=''></div>:<></>}
             </button>
           </Link>
