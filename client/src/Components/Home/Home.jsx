@@ -136,7 +136,7 @@ const Home = () => {
             </div>
             <div className="home-home-bar">
                 <div className="home-home-left">
-                    <h1>My Balance</h1>
+                    <h1>withdrawable Earnings</h1>
                     <h2>KES {balance}.00</h2>
                     <Link style={{textDecoration: 'none'}} to = '/withdraw'>
                         <button onClick={()=>{setRecharge({...recharge, withdraw: true})}}>
@@ -146,7 +146,7 @@ const Home = () => {
                     </Link>  
                 </div>      
                 <div className="home-home-right">
-                    <h1>Invite Income</h1>
+                    <h1>Recharge Amount</h1>
                     <h2>KES {invitationIncome ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
                     <Link style={{textDecoration: 'none'}} to = '/recharge'>
                         <button onClick={()=>{setRecharge({...recharge,recharge: true})}}>
@@ -162,7 +162,7 @@ const Home = () => {
                     <h2>KES {invitationIncome ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
                 </div>
                 <div className="home-home-right">
-                    <h1>Total Earnings</h1>
+                    <h1>Total product Earnings</h1>
                     <h2>KES 0.00</h2>
                 </div>                
             </div>
