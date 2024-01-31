@@ -147,7 +147,7 @@ const Home = () => {
                 </div>      
                 <div className="home-home-right">
                     <h1>Invite Income</h1>
-                    <h2>KES {invitationIncome.reedem_amount > 1 ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
+                    <h2>KES {invitationIncome ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
                     <Link style={{textDecoration: 'none'}} to = '/recharge'>
                         <button onClick={()=>{setRecharge({...recharge,recharge: true})}}>
                             Recharge
