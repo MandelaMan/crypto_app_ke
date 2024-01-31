@@ -15,11 +15,12 @@
     width: 100%;
     background: blueviolet;
     align-items: center;
-    height: 200px;
+    height: auto;
     margin: 0;
     justify-content: space-around;
     border-radius: 10px;
     text-align: center;
+    padding: 10px;
 }
 
 .mine-topbar p {
@@ -30,7 +31,7 @@
 
 
 .mine-left img,  .mine-right img {
-    width: 200px;
+    width: 150px;
     gap: 20px;
     cursor: pointer;
 }
@@ -45,6 +46,7 @@
     overflow: hidden;
     justify-content: center;
     margin-bottom: 120px;
+   
     
 }  
 
@@ -60,7 +62,7 @@
     color: white;
     font-size: 18px;
     font-weight: 600;
-    width: 380px;
+    width: 340px;
     background: none;
     height: 40px;
     text-align: left;
