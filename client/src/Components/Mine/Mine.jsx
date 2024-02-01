@@ -71,32 +71,32 @@ const Mine = () => {
         <div className="mine-mine-activities">
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,bidPaymentAccount:true})}}>
                  <Link style={{textDecoration: 'none'}} to = '/bidAccount'>
-                    <button>Bind Payment account</button>
+                    Bind Payment account
                  </Link>
                 {loadPage.bidPaymentAccount?<div className=''></div>:<></>}   
             </div>
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,withdrawalLog:true})}}>
                 <Link style={{textDecoration: 'none'}} to = '/withdrawalHistory'>
-                     <button>withdraw log</button>
+                     withdraw log
                  </Link>
                 {loadPage.withdrawalLog?<div className=''></div>:<></>} 
             </div>
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,rechargeMagagement:true})}}>
                <Link style={{textDecoration: 'none'}} to = '/rechargeLog'>
-                    <button>Recharge Management</button>
+                    Recharge Management
                  </Link>
                 {loadPage.rechargeMagagement?<div className=''></div>:<></>} 
             </div>
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,productIncome:true})}}>
               <Link style={{textDecoration: 'none'}} to = '/projectIncome'>
-                     <button>Product Income</button> 
+                     Product Income 
                  </Link>
                 {loadPage.productIncome?<div className=''></div>:<></>} 
             </div>
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,customerService:true})}}>
                <Link style={{textDecoration: 'none'}} to = '/bidpaymentaccount'>
-                     <button>Customer Service</button>
-                 </Link>
+                     Customer Service
+                </Link>
                 {loadPage.customerService?<div className=''></div>:<></>} 
             </div>
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,logOut:true})}}>
