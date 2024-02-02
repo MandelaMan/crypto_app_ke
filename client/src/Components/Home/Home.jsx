@@ -140,9 +140,9 @@ const Home = () => {
    
     useEffect(() => {   
         
-      getMyTransactions();      
-      getInvitationIncome();
-      getBalance();
+    //   getMyTransactions();      
+    //   getInvitationIncome();
+    //   getBalance();
       getProducts();
 
       return ()=>{
