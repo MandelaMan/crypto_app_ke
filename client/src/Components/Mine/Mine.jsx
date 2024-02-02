@@ -11,7 +11,6 @@ const Mine = () => {
 
     const dispatch = useDispatch()
 
-    
     const [loadPage,setLoadPage] = useState({
         recharge: false,
         withdrawal : false,
@@ -77,7 +76,7 @@ const Mine = () => {
             </div>
             <div className="mine-active" onClick={() => {setLoadPage({...loadPage,withdrawalLog:true})}}>
                 <Link style={{textDecoration: 'none'}} to = '/withdrawalHistory'>
-                     withdraw log
+                    Withdraw log
                  </Link>
                 {loadPage.withdrawalLog?<div className=''></div>:<></>} 
             </div>

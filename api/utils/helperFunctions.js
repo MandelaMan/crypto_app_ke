@@ -25,7 +25,13 @@ module.exports = {
     }
 
     verify(token, "4_8y$1hDv76", (err, user) => {
-      if (err) return next(this.errorHandler(403, err));
+      if (err) {
+        next(this.errorHandler(403, err));
+
+        return res.clearCookie("access_token").res.status(200).json({
+          message: "User has been logged out",
+        });
+      }
 
       req.user = user;
 

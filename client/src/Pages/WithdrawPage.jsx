@@ -1,4 +1,3 @@
-import React from 'react'
 import Withdraw from '../Components/Withdraw/Withdraw'
 
 const WithdrawPage = () => {
