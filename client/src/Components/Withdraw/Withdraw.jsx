@@ -36,7 +36,7 @@ const Withdraw = () => {
 
      useEffect(() => {   
         
-      getWithdrawableAmount(); 
+    //   getWithdrawableAmount(); 
 
       return ()=>{
         // removeEventListner(a)  //whenever the component removes it will executes

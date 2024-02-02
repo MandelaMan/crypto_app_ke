@@ -135,11 +135,8 @@ const Home = () => {
             return bitcoin_logo;
         }
     };
-
-
    
-    useEffect(() => {   
-        
+    useEffect(() => {           
     //   getMyTransactions();      
     //   getInvitationIncome();
     //   getBalance();
