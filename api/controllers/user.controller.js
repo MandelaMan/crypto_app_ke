@@ -64,11 +64,7 @@ module.exports = {
         });
       }
 
-      const getAmount = () => {
-        return 5000;
-      };
-
-      return res.status(200).json(results === undefined ? 0 : getAmount());
+      return res.status(200).json(results);
     });
   },
   getInvitationIncome: async (req, res, next) => {

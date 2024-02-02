@@ -46,7 +46,6 @@ const Home = () => {
             console.log(err)
         }
     }
-
     
     const getMyTransactions = async () => {
         try{
@@ -65,8 +64,6 @@ const Home = () => {
             console.log(err)
         }
     }
-
-
 
     const getInvitationIncome = async () => {
         try{
