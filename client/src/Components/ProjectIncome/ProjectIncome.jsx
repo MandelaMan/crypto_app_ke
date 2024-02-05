@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import './ProjectIncome.css'
 import { useSelector } from 'react-redux'
+import BottomBar from '../BottomBar/BottomBar'
 
 const ProjectIncome = () => {
      const { currentUser } = useSelector((state) => state.user)
@@ -74,6 +75,7 @@ const ProjectIncome = () => {
                 } 
             </>
             }
+        <BottomBar />
         </div>
     )
 }

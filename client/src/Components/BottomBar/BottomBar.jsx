@@ -6,6 +6,9 @@ import team_icon    from '../Assets/Team_image.png'
 import mine_icon from '../Assets/Mine_logo.png'
 import { Link } from 'react-router-dom'
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
 
 const BottomBar = () => {
     const [menu,setMenu] = useState({

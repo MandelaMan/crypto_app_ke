@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import './WithdrawalHistory.css'
 import { useSelector } from 'react-redux'
+import BottomBar from '../BottomBar/BottomBar'
 
 const WithdrawalHistory = () => {
     const { currentUser } = useSelector((state) => state.user)
@@ -67,8 +68,10 @@ const WithdrawalHistory = () => {
                 } 
             </>
             }                     
-        </div>       
+        </div>   
+        <BottomBar />    
     </div>
+    
   )
 }
 
