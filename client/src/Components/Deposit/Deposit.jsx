@@ -2,6 +2,7 @@ import React from 'react'
 import './Deposit.css'
 import mpesa_logo from '../Assets/mpesa-logo.png'
 
+
 const Deposit = () => {
   return (
     <div className='deposit'>

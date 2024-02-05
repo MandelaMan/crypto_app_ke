@@ -34,22 +34,31 @@
   border-radius: 15px;
 }
 
-.recharge-contents button {
-  border-style: solid;
-  border-radius: 10px;
-  height: 75px;
-  width: 101px;
-  padding: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  color: white;
-  background: none;
-}
+
 .recharge-contents {
-  padding: 15px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    height: auto;
 }
 
+.recharge-contents button {
+    border-style: solid;
+    border-radius: 10px;
+    height: 75px;
+    width: 90px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    background: none;
+}
 .recharge-input {
   display: flex;
   flex-direction: column;
@@ -96,3 +105,122 @@
   font-size: 13px;
   font-weight: 600;
 }
+
+
+
+
+.deposit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 30px;
+  
+} 
+
+.depostit-mpesa-logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 130px;
+  margin-bottom: 20px;
+}
+.depostit-mpesa-logo img {
+  width: 250px;
+  height: 170px;
+}
+
+.deposit-mpesa-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;    
+}
+
+.deposit-mpesa-info h3 {
+  font-size: 18px;
+  color: #4a4a4a;
+  line-height: 1.5;
+  text-align: left;
+}
+.deposit-mpesa-info p {
+  font-size: 14px;
+  font-weight: 600;
+  color: aqua;
+}
+
+.deposit-payment-number {
+  display: flex;
+  margin-bottom: 10px;
+  background: white;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+
+.left-side , .right-side{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.right-side button {
+  width: auto;
+  border-style: none;
+  background: none;
+  float: right;
+  cursor: pointer;
+}
+
+.left-side p , .right-side p{
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.deposit-submit-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deposit-submit-info p{
+  font-size: 14px;
+  font-weight: 600;
+  color: red;
+}
+
+.deposit-submit-info input {
+  margin-top: 3px;
+  height: 30px;
+  font-size: 14px;
+  padding: 7px;
+  text-align: left;
+  outline: none;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+}
+
+.deposit-submit-info button {
+  margin-top: 9px;
+  padding: 9px;
+  background-color: blueviolet;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+  
+
+
+

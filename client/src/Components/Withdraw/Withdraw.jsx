@@ -4,13 +4,9 @@ import './Withdraw.css'
 import { useSelector} from "react-redux";
 
 const Withdraw = () => {
-
     const { currentUser } = useSelector((state) => state.user)
-
     const [withdrawableAmount, setWithdrawableAmount] = useState(0)
-    
     const [amount, setAmount] = useState(0)
-
      const getWithdrawableAmount = async () => {
         try{
             const res = await fetch(`/api/user/withdrawable-amount/${currentUser.user_code}`, {
