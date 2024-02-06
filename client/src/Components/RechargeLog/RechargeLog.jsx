@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import './RechargeLog.css'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import BottomBar from '../BottomBar/BottomBar';
 
 const RechargeLog = () => {
     const [recharge, setRecharge] = useState('recharge');
@@ -78,7 +79,8 @@ const RechargeLog = () => {
                     </div>
                 } 
             </>
-            }         
+            }    
+            <BottomBar />     
         </div>
     )
 }

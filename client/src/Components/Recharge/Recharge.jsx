@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './Recharge.css'
 import mpesa_logo from '../Assets/mpesa-logo.png'
+import BottomBar from '../BottomBar/BottomBar'
 
 
 const Recharge = () => {
@@ -80,7 +81,10 @@ const Recharge = () => {
               <button onClick={()=>{currentStatus(null)}} >{`<<`} Go Back</button>
           </div>
 </div>
-</>}</>  
+
+</>}
+<BottomBar />
+</>  
   )
 }
 
