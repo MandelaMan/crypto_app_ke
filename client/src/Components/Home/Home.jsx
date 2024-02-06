@@ -135,6 +135,34 @@ const Home = () => {
             return bitcoin_logo;
         }
     };
+
+    const purchaseProduct = async (p) => {
+
+        let details = {
+            product_id: p.code,
+        }
+
+        const res = await fetch('/api/product/purchase', {
+          method: 'POST',
+          headers : {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify({
+            ...details,
+            user_id: currentUser.id
+          })
+        });
+
+        const data = await res.json()
+
+        if(data['success'] === 0){ 
+            console.log("Purchase Failed") 
+          return;
+        }
+        else{
+            console.log("Purchased")
+        }  
+    }
    
     useEffect(() => {           
     //   getMyTransactions();      
@@ -206,8 +234,11 @@ const Home = () => {
                             <h2>Daily Earnings</h2>    
                         </div>    
                     </div>
-                    <Link style={{textDecoration: 'none'}} to = '/products'>
-                        <button onClick={()=>{setRecharge({...recharge, buyProduct: true})}}>
+                    <Link style={{textDecoration: 'none'}} to = ''>
+                        <button onClick={()=>{
+                                setRecharge({...recharge, buyProduct: true})                        
+                                purchaseProduct(products[i]); 
+                            }}>
                             Buy Product
                         {recharge.buyProduct? <div className=''></div>:<></>}
                         </button>

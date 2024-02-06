@@ -7,6 +7,7 @@ const {
   getBalance,
   getUserWithdrawableAmount,
   getWithdrawals,
+  getUserPurchasedProducts,
 } = require("../controllers/user.controller.js");
 const { verifyToken } = require("../utils/helperFunctions.js");
 
@@ -16,6 +17,8 @@ router.get("/test", test);
 
 // Added middleware verifyToken to check whether the token is valid
 router.get("/transactions/:id", verifyToken, getUserTransactions);
+
+router.get("/products/:id", verifyToken, getUserPurchasedProducts);
 
 router.get("/invitation-income/:id", verifyToken, getInvitationIncome);
 router.get("/withdrawable-amount/:id", verifyToken, getUserWithdrawableAmount);

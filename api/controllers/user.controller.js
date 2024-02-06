@@ -11,10 +11,29 @@ const { genSaltSync, hashSync, compareSync, compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 module.exports = {
+  getUserPurchasedProducts: async (req, res, next) => {
+    if (req.user.id !== req.params.id) {
+      next(errorHandler(403, "You are not authenticated"));
+      return res.status(403).json({
+        success: 0,
+        message: "Error occured",
+      });
+    }
+
+    await allPurchasedProductsByUser(filters, (err, results) => {
+      if (err) {
+        return res.status(200).json({
+          success: 0,
+          message: "Error getting transactions",
+        });
+      }
+
+      return res.status(200).json(results);
+    });
+  },
   getUserTransactions: async (req, res, next) => {
     if (req.user.id !== req.params.id) {
       next(errorHandler(403, "You are not authenticated"));
-
       return res.status(403).json({
         success: 0,
         message: "Error occured",

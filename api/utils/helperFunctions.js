@@ -1,9 +1,10 @@
 const { verify, sign } = require("jsonwebtoken");
 
 module.exports = {
-  errorHandler: (statusCode, message) => {
+  errorHandler: (success = 0, statusCode, message) => {
     const error = new Error();
 
+    error.success = success;
     error.statusCode = statusCode;
     error.message = message;
 
@@ -14,21 +15,26 @@ module.exports = {
   },
   generateToken: (id) => {
     return sign({ id }, process.env.JWT_KEY, {
-      expiresIn: "1h",
+      expiresIn: "5h",
     });
   },
   verifyToken: (req, res, next) => {
     const token = req.cookies.access_token;
 
     if (!token) {
-      return next(this.errorHandler(403, "Token not provided"));
+      next(this.errorHandler(403, "Token not provided"));
+
+      return res.clearCookie("access_token").status(500).json({
+        success: 0,
+        message: "Internal error. Try again later token has expired",
+      });
     }
 
     verify(token, "4_8y$1hDv76", (err, user) => {
       if (err) {
         next(this.errorHandler(403, err));
 
-        return res.clearCookie("access_token").res.status(200).json({
+        return res.clearCookie("access_token").status(403).json({
           message: "User has been logged out",
         });
       }

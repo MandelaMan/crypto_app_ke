@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './Mine.css'
 import left_Image from '../Assets/Bitcoin-Logo.png'
 import right_image from '../Assets/TRON-Logo.png'

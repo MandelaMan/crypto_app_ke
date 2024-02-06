@@ -3,12 +3,11 @@ import './ProjectIncome.css'
 import { useSelector } from 'react-redux'
 
 const ProjectIncome = () => {
-     const { currentUser } = useSelector((state) => state.user)
+    const { currentUser } = useSelector((state) => state.user)
 
     const [earnings, setEarnings] = useState(null)
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
-
     
     const getEarnings = async() => {
         try{
@@ -54,7 +53,7 @@ const ProjectIncome = () => {
                             <div>Information</div>
                             <div>Amount</div>
                         </div>
-                        <hr />
+                        <hr />                        
                         {earnings.map((r,i) =>  
                             <div key={i}>
                                <div className="project-income-list">
