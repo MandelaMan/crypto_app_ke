@@ -13,98 +13,6 @@ import BottomBar from '../BottomBar/BottomBar'
 import { useSelector} from "react-redux";
 
 const Home = () => {
-    const { currentUser } = useSelector((state) => state.user)
-    const [recharge,setRecharge] = useState({
-        withdraw: false,
-        deposit: false,
-        buyProduct: false
-    });
-
-    const [invitationIncome, setInvitationIncome] = useState(null)
-
-    const [myTransactions, setMyTransactions] = useState([])
-
-    const [balance, setBalance] = useState(0)
-
-    const [products, setProducts] = useState(null)
-
-    const getBalance = async () => {
-        try{
-            const res = await fetch(`/api/user/balance/${currentUser.user_code}`, {
-                method: 'GET',
-            });
-
-            const data = await res.json()
-
-            if(data['success'] === 0){ 
-                // setMyListingsError(data.message)        
-                return;
-            }            
-            setBalance(data)
-        }
-        catch(err){
-            console.log(err)
-        }
-    }
-    
-    const getMyTransactions = async () => {
-        try{
-            const res = await fetch(`/api/user/transactions/${currentUser.user_code}`, {
-                method: 'GET',
-            });
-
-            const data = await res.json()
-
-            if(data['success'] === 0){     
-                return;
-            }            
-            setMyTransactions(data)
-        }
-        catch(err){
-            console.log(err)
-        }
-    }
-
-    const getInvitationIncome = async () => {
-        try{
-            const res = await fetch(`/api/user/invitation-income/${currentUser.user_code}`, {
-                method: 'GET',
-            });
-
-            const data = await res.json()
-
-            if(data['success'] === 0){ 
-                // setMyListingsError(data.message)        
-                return;
-            }
-
-            setInvitationIncome(data)
-        }
-        catch(err){
-            console.log(err)
-        }
-    }
-
-    const getProducts = async () => {
-        try{
-            const res = await fetch(`/api/product/all`, {
-                method: 'GET',
-            });
-
-            const data = await res.json()
-
-            if(data['success'] === 0){ 
-                // setMyListingsError(data.message)        
-                return;
-            }
-
-            setProducts(data)
-        }
-        catch(err){
-            console.log(err)
-        }
-    }
-
     const coverImage = (logo) => {
 
         if(logo === "bitcoin"){
@@ -136,6 +44,124 @@ const Home = () => {
         }
     };
 
+    const { currentUser } = useSelector((state) => state.user)
+    const [recharge,setRecharge] = useState({
+        withdraw: false,
+        deposit: false,
+        buyProduct: false
+    });
+
+    const [loadingBalances, setLoadingBalances] = useState({})
+
+    const [balances, setBalances] = useState(null)
+
+    const [products, setProducts] = useState(null)
+
+    const updateRechargeAmounts = async (data) => {
+
+        let recharge_amount = data.filter((transaction) => {
+            return transaction.type === 'Recharge' &&  transaction.status === 'Complete';
+        });
+                
+        recharge_amount = recharge_amount.reduce((acc, transaction) => acc + transaction.amount, 0);
+        
+        return recharge_amount
+    }
+
+    const updateEarnings = async (data) => {
+
+        let total_earnings = data.filter((transaction) => {
+            return transaction.type === 'Earnings';
+        });
+                
+        total_earnings = total_earnings.reduce((acc, transaction) => acc + transaction.amount, 0);
+
+        return total_earnings
+    }
+
+     const updateWithdrawableEarnings = async (data) => {
+
+        let total_earnings = data.filter((transaction) => {
+            return transaction.type === 'Earnings' && transaction.status === 'Available';
+        });
+                
+        total_earnings = total_earnings.reduce((acc, transaction) => acc + transaction.amount, 0);
+
+        return total_earnings
+    }
+
+    const getInvitationIncome = async () => {
+        try{
+            const res = await fetch(`/api/user/invitation-income/${currentUser.user_code}`, {
+                method: 'GET',
+            });
+
+            const data = await res.json()
+
+            if(data.success === 0){        
+                return;
+            }
+
+            return data;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+     
+    const getTransactions = async () => {
+        try{
+            setLoadingBalances(true)
+
+            const res = await fetch(`/api/user/transactions/${currentUser.user_code}`, {
+                method: 'GET',
+            });
+
+            const data = await res.json()
+
+            if(data.success === 0){ 
+                // setMyListingsError(data.message)        
+                return;
+            }
+            else{
+                let recharge_amount = await updateRechargeAmounts(data);
+
+                let total_earnings = await updateEarnings(data);
+
+                let withdrawable_earnings = await updateWithdrawableEarnings(data);                
+
+                let invite_income = await getInvitationIncome();
+                
+                setBalances({...balances,  invite_income, recharge_amount, total_earnings, withdrawable_earnings})
+
+                setLoadingBalances(false);             
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    }    
+
+    const getProducts = async () => {
+        try{
+            const res = await fetch(`/api/product/all`, {
+                method: 'GET',
+            });
+
+            const data = await res.json()
+
+            if(data['success'] === 0){ 
+                // setMyListingsError(data.message)        
+                return;
+            }
+
+            setProducts(data)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }   
+
     const purchaseProduct = async (p) => {
 
         let details = {
@@ -163,16 +189,15 @@ const Home = () => {
             console.log("Purchased")
         }  
     }
-   
-    useEffect(() => {           
-    //   getMyTransactions();      
-    //   getInvitationIncome();
-    //   getBalance();
-      getProducts();
+  
+    useEffect(() => {               
+        getTransactions();         
+        getProducts();
 
-      return ()=>{
-        // removeEventListner(a)  //whenever the component removes it will executes
-      }
+        return ()=>{
+            setBalances({})
+            // removeEventListner(a)  //whenever the component removes it will executes
+        }
     } ,[]) 
 
     return ( 
@@ -180,39 +205,47 @@ const Home = () => {
             <div className="home-home-display">
                 <p>Unlimited - product purchase</p>
             </div>
-            <div className="home-home-bar">
-                <div className="home-home-left">
-                    <h1>Withdrawable Earnings</h1>
-                    <h2>KES {balance}.00</h2>
-                    <Link style={{textDecoration: 'none'}} to = '/withdraw'>
-                        <button onClick={()=>{setRecharge({...recharge, withdraw: true})}}>
-                            Withdraw
-                        {recharge.withdraw? <div className=''></div>:<></>}
-                        </button>
-                    </Link>  
-                </div>      
-                <div className="home-home-right">
-                    <h1>Recharge Amount</h1>
-                    <h2>KES {invitationIncome ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
-                    <Link style={{textDecoration: 'none'}} to = '/recharge'>
-                        <button onClick={()=>{setRecharge({...recharge,recharge: true})}}>
-                            Recharge
-                        {recharge.recharge? <div className=''></div>:<></>}
-                        </button>
-                    </Link>  
-                </div>          
-            </div>
-             <div className="home-home-bar">
-                <div className="home-home-left">
-                    <h1>Invite Income</h1>
-                    <h2>KES {invitationIncome ? invitationIncome.redeemed_times * invitationIncome.reedem_amount : 0}.00</h2>
-                </div>
-                <div className="home-home-right">
-                    <h1>Total Earnings</h1>
-                    <h2>KES 0.00</h2>
-                </div>                
-            </div>
-            {/* {products.length} */}
+            {loadingBalances ? 
+                <div className="home-home-bar">
+                    <h1>Loading Balances. Please wait ....</h1>                    
+                </div> 
+                : 
+                <>
+                    <div className="home-home-bar">
+                        <div className="home-home-left">
+                            <h1>Withdrawable Earnings</h1>
+                            <h2>KES {balances.withdrawable_earnings ? balances.withdrawable_earnings : 0}.00</h2>
+                            <Link style={{textDecoration: 'none'}} to = '/withdraw'>
+                                <button onClick={()=>{setRecharge({...recharge, withdraw: true})}}>
+                                    Withdraw
+                                {recharge.withdraw? <div className=''></div>:<></>}
+                                </button>
+                            </Link>  
+                        </div>      
+                        <div className="home-home-right">
+                            <h1>Recharge Amount</h1>
+                            <h2>KES {balances.recharge_amount ? balances.recharge_amount : 0}.00</h2>
+                            <Link style={{textDecoration: 'none'}} to = '/recharge'>
+                                <button onClick={()=>{setRecharge({...recharge,recharge: true})}}>
+                                    Recharge
+                                {recharge.recharge? <div className=''></div>:<></>}
+                                </button>
+                            </Link>  
+                        </div>          
+                    </div>
+                    <div className="home-home-bar">
+                        <div className="home-home-left">
+                            <h1>Invite Income</h1>
+                            <h2>KES {balances.invite_income ? balances.invite_income : 0}.00</h2>
+                        </div>
+                        <div className="home-home-right">
+                            <h1>Total Earnings</h1>
+                            <h2>KES {balances.total_earnings ? balances.total_earnings : 0}.00</h2>
+                        </div>                
+                    </div>
+                </>
+            }
+
             <div className="home-products-tittle">
                 <p>Crypto Currencies</p>
 

@@ -5,26 +5,43 @@ import { useSelector} from "react-redux";
 
 const Withdraw = () => {
     const { currentUser } = useSelector((state) => state.user)
-    const [withdrawableAmount, setWithdrawableAmount] = useState(0)
+    const [withdrawableAmount, setWithdrawableAmount] = useState(null)
     const [amount, setAmount] = useState(0)
-     const getWithdrawableAmount = async () => {
+
+     const updateWithdrawableEarnings = async (data) => {
+
+        let total_earnings = data.filter((transaction) => {
+            return transaction.type === 'Earnings' && transaction.status === 'Available';
+        });
+                
+        total_earnings = total_earnings.reduce((acc, transaction) => acc + transaction.amount, 0);
+
+        return total_earnings
+    }
+
+    const getWithdrawableAmount= async () => {
         try{
-            const res = await fetch(`/api/user/withdrawable-amount/${currentUser.user_code}`, {
+
+            const res = await fetch(`/api/user/transactions/${currentUser.user_code}`, {
                 method: 'GET',
             });
 
             const data = await res.json()
 
-            if(data['success'] === 0){     
+            if(data.success === 0){ 
+                // setMyListingsError(data.message)        
                 return;
-            }  
+            }
+            else{
+                let withdrawable_earnings = await updateWithdrawableEarnings(data); 
 
-            setWithdrawableAmount(data)
+                setWithdrawableAmount(withdrawable_earnings)
+            }
         }
         catch(err){
             console.log(err)
         }
-    }
+    } 
 
     const handleChange = (e) => {
         setAmount(e.target.value)
@@ -32,7 +49,7 @@ const Withdraw = () => {
 
      useEffect(() => {   
         
-    //   getWithdrawableAmount(); 
+      getWithdrawableAmount(); 
 
       return ()=>{
         // removeEventListner(a)  //whenever the component removes it will executes
@@ -45,7 +62,7 @@ const Withdraw = () => {
             Withdraw
         </div>
         <div className="withdraw-account-balance">
-            <p>KES {withdrawableAmount}.00</p>
+            <p>{withdrawableAmount ? `KES ${withdrawableAmount}.00` : "Fetching withdrawable amaount..."}</p>
             <p>My Balance</p>
         </div>
         <div className="withdraw-amount-input">

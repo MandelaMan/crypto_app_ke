@@ -137,7 +137,9 @@ module.exports = {
         });
       }
 
-      return res.status(200).json(results);
+      let invitation_income = results.reedem_amount * results.redeemed_times;
+
+      return res.status(200).json(invitation_income);
     });
   },
   getBalance: async (req, res, next) => {

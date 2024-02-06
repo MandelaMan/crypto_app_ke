@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2024 at 12:37 PM
+-- Generation Time: Feb 06, 2024 at 03:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,8 +42,8 @@ CREATE TABLE `invitation_income` (
 --
 
 INSERT INTO `invitation_income` (`id`, `user_id`, `code`, `created_on`, `reedem_amount`, `redeemed_times`, `reedemed_by`) VALUES
-(2, '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'XD50T2', NULL, 250, 3, '[]'),
-(3, 'dc119163-b549-4327-9fbf-ca4d60e66cfe', '28Q5XA', NULL, 250, 0, '[\"1757bc14-ae93-4321-8018-2eb7509d9dc2\"]');
+(2, '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'XD50T2', NULL, 250, 3, '[\"dc119163-b549-4327-9fbf-ca4d60e66cfe\", \"dc119163-b549-4327-9fbf-ca4d60e66cfe\", \"dc119163-b549-4327-9fbf-ca4d60e66cfe\"]'),
+(3, 'dc119163-b549-4327-9fbf-ca4d60e66cfe', '28Q5XA', NULL, 250, 1, '[\"1757bc14-ae93-4321-8018-2eb7509d9dc2\"]');
 
 -- --------------------------------------------------------
 
@@ -111,11 +111,11 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `code`, `created_on`, `type`, `user_id`, `method`, `status`, `amount`) VALUES
-(1, 'SAQ89UYJ23', '2024-01-29 07:15:51', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Inprogress', 500),
+(1, 'SAQ89UYJ23', '2024-01-29 07:15:51', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 500),
 (2, 'SAQ23RYJ23', '2024-01-29 07:15:51', 'Withdrawal', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Inprogress', 250),
 (3, 'SAQ9I78J23', '2024-01-29 07:20:14', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 2500),
-(4, 'MXQ9IP8J26', '2024-01-29 07:20:14', 'Recharge', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 3000),
-(5, '', '2024-01-30 14:02:35', 'Earnings', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 1200),
+(4, 'MXQ9IP8J26', '2024-01-29 07:20:14', 'Earnings', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Available', 3000),
+(5, '', '2024-01-30 14:02:35', 'Earnings', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Available', 1200),
 (6, '', '2024-01-30 14:02:35', 'Earnings', '1757bc14-ae93-4321-8018-2eb7509d9dc2', 'MPESA', 'Complete', 55);
 
 -- --------------------------------------------------------
