@@ -108,7 +108,6 @@ module.exports = {
       message: "ok",
     });
   },
-
   getUserWithdrawableAmount: async (req, res, next) => {
     if (req.user.id !== req.params.id) {
       return next(errorHandler(403, "You are not authenticated"));

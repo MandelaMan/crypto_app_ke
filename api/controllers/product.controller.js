@@ -1,12 +1,6 @@
-const {
-  getInvitationIncomeByUserId,
-  updateInvitationCodeRedeemTimes,
-} = require("../models/invitation.model.js");
 const { allProducts } = require("../models/product.model.js");
 const { createPurchase } = require("../models/purchased_product.model.js");
 const { errorHandler } = require("../utils/helperFunctions.js");
-const { genSaltSync, hashSync, compareSync, compare } = require("bcrypt");
-const { sign } = require("jsonwebtoken");
 
 module.exports = {
   purchaseProduct: async (req, res, next) => {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2024 at 02:32 PM
+-- Generation Time: Feb 06, 2024 at 12:37 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -53,6 +53,7 @@ INSERT INTO `invitation_income` (`id`, `user_id`, `code`, `created_on`, `reedem_
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
+  `code` varchar(200) DEFAULT NULL,
   `price` int(11) NOT NULL,
   `daily_earnings` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -63,15 +64,30 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `price`, `daily_earnings`, `name`, `period_cycle`) VALUES
-(1, 7800, 3000, 'bitcoin', 26),
-(2, 4500, 1200, 'binance', 30),
-(3, 10000, 5600, 'bnb', 30),
-(4, 2000, 300, 'cosmos', 15),
-(5, 10000, 4000, 'dogcoin', 25),
-(6, 2000, 1100, 'flow', 15),
-(7, 15000, 8000, 'litecoin', 30),
-(8, 3500, 900, 'tether', 25);
+INSERT INTO `products` (`id`, `code`, `price`, `daily_earnings`, `name`, `period_cycle`) VALUES
+(1, '1757bc14-ae93-4321-7809-2eb7509d9dc2', 7800, 3000, 'bitcoin', 26),
+(2, '1757bc14-ae93-8765-8018-2eb7509d9dc2', 4500, 1200, 'binance', 30),
+(3, '1757bc14-ae93-1111-2222-2eb7509d9dc2', 10000, 5600, 'bnb', 30),
+(4, '1757bc14-ae93-1234-3099-2eb7509d9dc2', 2000, 300, 'cosmos', 15),
+(5, '1757bc14-ae93-1099-3229-2eb7509d9dc2', 10000, 4000, 'dogcoin', 25),
+(6, '1757bc14-ae93-4212-8999-2eb7509d9dc2', 2000, 1100, 'flow', 15),
+(7, '1757bc14-ae93-9023-9999-2eb7509d9dc2', 15000, 8000, 'litecoin', 30),
+(8, '1757bc14-ae93-0000-6666-2eb7509d9dc2', 3500, 900, 'tether', 25);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchased_products`
+--
+
+CREATE TABLE `purchased_products` (
+  `id` int(11) DEFAULT NULL,
+  `product_id` varchar(100) DEFAULT NULL,
+  `user_id` varchar(100) DEFAULT NULL,
+  `date_purchased` datetime DEFAULT NULL,
+  `earnings` int(11) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
