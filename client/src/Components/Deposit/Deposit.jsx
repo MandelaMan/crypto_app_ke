@@ -10,7 +10,7 @@ const Deposit = () => {
             <img src={mpesa_logo} alt="" />
         </div>
         <div className="deposit-mpesa-info">
-            <h3>OrderId: 425665356753666655</h3>
+            <h3>OrderId: 666655</h3>
             <p>
              Please copy the phone number and paste it into
              your M-Pesa app. Before sending, ensure to verify the recipient's name to prevent any validation issues.
